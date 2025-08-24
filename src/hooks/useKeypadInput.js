@@ -9,13 +9,15 @@ import {
 /**
  * Hook to handle keypad input & code validation
  * @param {function} onUnlock - called when unlock code is correct
- * @param {function} onSequenceSuccess - called when sequence code is correct
+ * @param {function} onSequenceSuccess - called when sequence code is correct (game logic)
  * @param {function} onWrongCode - called when a wrong code is entered
+ * @param {function} onSequenceEnteredHere - called when sequence is entered at keypad (the "troll" case)
  */
 export default function useKeypadInput(
   onUnlock,
   onSequenceSuccess,
-  onWrongCode
+  onWrongCode,
+  onSequenceEnteredHere
 ) {
   const [entered, setEntered] = useState("");
   const [pressedKey, setPressedKey] = useState(null);
@@ -60,7 +62,10 @@ export default function useKeypadInput(
 
     // Sequence phase
     if (code === SEQUENCE_CODE) {
+      // 🔥 Normal intended gameplay
       onSequenceSuccess?.();
+      // 🤡 Troll case: entered here instead of elsewhere
+      onSequenceEnteredHere?.();
       setTimeout(() => setEntered(""), 600);
     } else {
       onWrongCode?.("sequence");
