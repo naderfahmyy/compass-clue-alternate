@@ -56,17 +56,19 @@ export default function App() {
 
       {/* The troll message "Not Here" */}
       <div
-        className="absolute text-white font-extrabold opacity-30 pointer-events-none select-none"
+        className="absolute w-screen h-screen text-white font-extrabold opacity-30 pointer-events-none select-none"
         style={{
-          fontSize: `${5 + wrongEntryCount * 5}rem`, // grows bigger each time
-          transform: "translate(-50%, -50%)",
-          top: "50%",
-          left: "50%",
+          fontSize: `${2 + wrongEntryCount * 3}rem`, // grows bigger each time
+          // transform: "translate(-50%, -50%)",
+          // top: "50%",
+          // left: "50%",
           zIndex: 0, // stays behind keypad
           transition: "font-size 0.5s ease-in-out",
         }}
       >
-        Not Here
+        <div className="w-full h-full flex items-center justify-center">
+          APP
+        </div>
       </div>
 
       {/* The keypad itself */}
